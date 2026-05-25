@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BHT 2033</title>
+
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --text-main: #1e293b;
+      --primary-color: #0f172a;
+      --secondary-color: #1e3a8a;
+      --accent-color: #3b82f6;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+    }
+
+    .title {
+      color: white;
+      margin-bottom: 70px;
+    }
+
+    .title p {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .title h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 35px;
+      color: white;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .number {
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #93c5fd;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .arrow {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      color: #93c5fd;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover .arrow {
+      transform: translateX(8px);
+    }
+
+    @media (max-width: 700px) {
+      .title {
+        margin-bottom: 50px;
+      }
+
+      .card {
+        min-height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="container">
+
+      <div class="title">
+        <p>Semesterprojekt</p>
+        <h1>
+          Strategie,<br>
+          Transformation,<br>
+          Verantwortung:<br>
+          BHT 2033
+        </h1>
+      </div>
+
+      <div class="grid">
+
+        <a href="PESTEL-Analyse_BHT.html" class="card">
+          <div>
+            <div class="number">01</div>
+            <h2>PESTEL-Analyse</h2>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+
+        <a href="404.html" class="card">
+          <div>
+            <div class="number">02</div>
+            <h2>Stakeholder-Analyse</h2>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+
+        <a href="404.html" class="card">
+          <div>
+            <div class="number">03</div>
+            <h2>Geschäftsmodell / Business Model Canvas</h2>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+
+        <a href="404.html" class="card">
+          <div>
+            <div class="number">04</div>
+            <h2>Vision</h2>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+
+        <a href="404.html" class="card">
+          <div>
+            <div class="number">05</div>
+            <h2>Mission</h2>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+
+        <a href="404.html" class="card">
+          <div>
+            <div class="number">06</div>
+            <h2>Strategische Marktanalyse</h2>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+
+        <a href="404.html" class="card">
+          <div>
+            <div class="number">07</div>
+            <h2>SWOT & TOWS</h2>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
+```

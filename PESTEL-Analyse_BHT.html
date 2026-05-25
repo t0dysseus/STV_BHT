@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PESTEL-Analyse BHT</title>
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --text-main: #1e293b;
+            --primary-color: #0f172a;
+            --accent-color: #3b82f6;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            
+            /* Badge Colors */
+            --badge-starke-chance: #16a34a;
+            --badge-chance: #22c55e;
+            --badge-chance-risiko: #eab308;
+            --badge-risiko: #ef4444;
+            --badge-chance-aufgabe: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* --- BIG PESTEL NAVIGATION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a8a 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: #94a3b8;
+        }
+
+        .pestel-nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pestel-nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 15vw; /* Very large text */
+            font-weight: 900;
+            line-height: 1;
+            transition: all 0.3s ease;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .pestel-nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        /* --- CONTENT CONTAINER --- */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* --- SUMMARY (Zusammenfassung) --- */
+        .summary-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 60px;
+            border-top: 6px solid var(--accent-color);
+        }
+
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-header h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .summary-score {
+            text-align: right;
+        }
+
+        .summary-score .value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            line-height: 1;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .summary-box {
+            padding: 25px;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+        }
+
+        .summary-box h3 { margin-bottom: 15px; font-size: 1.2rem; }
+        .summary-box ul { list-style: none; }
+        .summary-box li { margin-bottom: 10px; font-weight: 500; }
+
+        .strategy-box {
+            background-color: #eff6ff;
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* --- SECTION TABLES --- */
+        .section-block {
+            margin-bottom: 60px;
+            scroll-margin-top: 40px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 { font-size: 1.5rem; }
+        .section-meta { font-size: 1rem; color: #cbd5e1; }
+        .section-meta strong { color: white; margin: 0 5px; }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #64748b;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background-color: #f8fafc; }
+
+        .factor-col { font-weight: 700; color: #0f172a; width: 20%; }
+        .weight-col { color: #64748b; font-weight: 600; white-space: nowrap; }
+        .desc-col { width: 30%; }
+        .dyn-col { width: 25%; }
+
+        /* Badges */
+        .circle-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-weight: 700;
+            color: white;
+            background-color: var(--primary-color);
+        }
+
+        .attr-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        /* Color Coding based on text value for generic styling without hardcoding IDs */
+        .bg-green-600 { background-color: #16a34a; } /* Starke Chance */
+        .bg-green-500 { background-color: #22c55e; } /* Chance, 4.0, 5.0 */
+        .bg-yellow-500 { background-color: #eab308; } /* Chance & Risiko, Chance & Aufgabe, 3.0 */
+        .bg-red-500 { background-color: #ef4444; } /* Risiko, 2.0 */
+
+        @media (max-width: 1024px) {
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .pestel-nav a { font-size: 20vw; gap: 10px; }
+            th, td { padding: 10px; font-size: 0.9rem; }
+            .factor-col, .desc-col, .dyn-col { width: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <p>Makro-Umwelt der BHT</p>
+        <div class="pestel-nav">
+            <a href="#politik-recht">P</a>
+            <a href="#oekonomie">E</a>
+            <a href="#gesellschaft">S</a>
+            <a href="#technologie">T</a>
+            <a href="#oekologie">E</a>
+            <a href="#politik-recht">L</a>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <div class="summary-section">
+            <div class="summary-header">
+                <div>
+                    <h2>Zusammenfassung</h2>
+                    <p style="color: #64748b; font-size: 1.1rem; margin-top: 5px;">Die Makro-Umwelt der BHT ist anspruchsvoll, aber insgesamt attraktiv.</p>
+                </div>
+                <div class="summary-score">
+                    <div class="value">3,8</div>
+                </div>
+            </div>
+
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <h3 style="color: #16a34a;">Höchste Chancen</h3>
+                    <ul>
+                        <li>Technologie (4,5)</li>
+                        <li>Gesellschaft (4,0)</li>
+                        <li>Ökologie (4,0)</li>
+                    </ul>
+                </div>
+                <div class="summary-box">
+                    <h3 style="color: #ef4444;">Größte Risiken</h3>
+                    <ul>
+                        <li>Finanzierung</li>
+                        <li>Rechtliche Komplexität</li>
+                        <li>Sanierungsbedarf</li>
+                        <li>Unklare Profilkommunikation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="strategy-box">
+                <h4 style="color: var(--primary-color); margin-bottom: 8px;">Strategische Ableitung</h4>
+                <p>Die BHT sollte ihre technische Stärke klarer mit gesellschaftlicher Verantwortung, Nachhaltigkeit, Praxisnähe und regionaler Wirkung verbinden.</p>
+            </div>
+        </div>
+
+        <div id="politik-recht" class="section-block">
+            <div class="section-header">
+                <h2>Politik & Recht</h2>
+                <div class="section-meta">
+                    Gewicht: <strong>25 %</strong> | <strong>3.0</strong> <span class="status-badge bg-yellow-500" style="margin-left: 10px;">Chance & Risiko</span>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Umweltfaktoren</th>
+                            <th>Gewicht</th>
+                            <th>Bedeutung für die BHT</th>
+                            <th>Score</th>
+                            <th>Attraktivität</th>
+                            <th>Dynamik & Kontext</th>
+                            <th>Wertung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="factor-col">Berliner Hochschulgesetz</td>
+                            <td class="weight-col">25 %</td>
+                            <td class="desc-col">Regelt Organisation, Zulassung, Studium, Prüfungen, Mitbestimmung und Hochschulauftrag.</td>
+                            <td><span class="circle-badge">3</span></td>
+                            <td><span class="attr-badge bg-yellow-500">3.0</span></td>
+                            <td class="dyn-col">Schafft Stabilität und Legitimation, begrenzt aber Flexibilität und Geschwindigkeit bei Veränderungen.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Risiko</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Land Berlin und Senatsverwaltung</td>
+                            <td class="weight-col">35 %</td>
+                            <td class="desc-col">Das Land Berlin ist zentraler Träger und Finanzierer der BHT.</td>
+                            <td><span class="circle-badge">3</span></td>
+                            <td><span class="attr-badge bg-yellow-500">3.0</span></td>
+                            <td class="dyn-col">Hochschulverträge und Landespolitik bestimmen Mittel, Ziele und strategische Spielräume.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Risiko</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Bundespolitische Förderprogramme</td>
+                            <td class="weight-col">15 %</td>
+                            <td class="desc-col">Förderprogramme können Digitalisierung, Forschung, Transfer und Nachhaltigkeit unterstützen.</td>
+                            <td><span class="circle-badge">4</span></td>
+                            <td><span class="attr-badge bg-green-500">4.0</span></td>
+                            <td class="dyn-col">Hoher Wettbewerb um Fördermittel. Erfolgreiche Anträge können Profil und Ressourcen stärken.</td>
+                            <td><span class="status-badge bg-green-500">Chance</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">EU Programme, Erasmus und Forschungsförderung</td>
+                            <td class="weight-col">10 %</td>
+                            <td class="desc-col">Internationale Mobilität, Kooperation und Forschungsprojekte stärken Sichtbarkeit und Vernetzung.</td>
+                            <td><span class="circle-badge">4</span></td>
+                            <td><span class="attr-badge bg-green-500">4.0</span></td>
+                            <td class="dyn-col">Die BHT besitzt mehr als 140 internationale Partnerhochschulen. Das erhöht die internationale Attraktivität.</td>
+                            <td><span class="status-badge bg-green-500">Chance</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Datenschutz, Barrierefreiheit und Prüfungsrecht</td>
+                            <td class="weight-col">10 %</td>
+                            <td class="desc-col">Digitale Lehre, Verwaltung und Kommunikation müssen rechtssicher und zugänglich sein.</td>
+                            <td><span class="circle-badge">3</span></td>
+                            <td><span class="attr-badge bg-yellow-500">3.0</span></td>
+                            <td class="dyn-col">Rechtliche Vorgaben erhöhen Aufwand, sichern aber Fairness, Schutz und Zugänglichkeit.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Risiko</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Hochschulinterne Governance</td>
+                            <td class="weight-col">5 %</td>
+                            <td class="desc-col">Gremien, AStA, Fachbereiche und Kommissionen prägen Mitbestimmung und Entscheidungsprozesse.</td>
+                            <td><span class="circle-badge">3</span></td>
+                            <td><span class="attr-badge bg-yellow-500">3.0</span></td>
+                            <td class="dyn-col">Beteiligung stärkt Legitimation, kann Prozesse aber verlangsamen.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Risiko</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="oekonomie" class="section-block">
+            <div class="section-header">
+                <h2>Ökonomie</h2>
+                <div class="section-meta">
+                    Gewicht: <strong>20 %</strong> | <strong>3.8</strong> <span class="status-badge bg-green-500" style="margin-left: 10px;">Überwiegend Chance</span>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Umweltfaktoren</th>
+                            <th>Gewicht</th>
+                            <th>Bedeutung für die BHT</th>
+                            <th>Score</th>
+                            <th>Attraktivität</th>
+                            <th>Dynamik & Kontext</th>
+                            <th>Wertung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="factor-col">Fachkräftemangel in technischen Berufen</td>
+                            <td class="weight-col">30 %</td>
+                            <td class="desc-col">Die BHT kann als technische Hochschule direkt zur Fachkräftesicherung beitragen.</td>
+                            <td><span class="circle-badge">5</span></td>
+                            <td><span class="attr-badge bg-green-500">5.0</span></td>
+                            <td class="dyn-col">Hoher Bedarf an MINT Kompetenzen stärkt den gesellschaftlichen und wirtschaftlichen Nutzen der BHT.</td>
+                            <td><span class="status-badge bg-green-600">Starke Chance</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Öffentliche Finanzierung</td>
+                            <td class="weight-col">25 %</td>
+                            <td class="desc-col">Grundfinanzierung durch das Land Berlin ist zentrale Einnahmequelle.</td>
+                            <td><span class="circle-badge">3</span></td>
+                            <td><span class="attr-badge bg-yellow-500">3.0</span></td>
+                            <td class="dyn-col">Haushaltsdruck kann Personal, Labore, Gebäude, Digitalisierung und Studienangebote beeinflussen.</td>
+                            <td><span class="status-badge bg-red-500">Risiko</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Drittmittel und Forschungsförderung</td>
+                            <td class="weight-col">15 %</td>
+                            <td class="desc-col">Drittmittel stärken Forschung, Transfer, Praxisprojekte und Reputation.</td>
+                            <td><span class="circle-badge">4</span></td>
+                            <td><span class="attr-badge bg-green-500">4.0</span></td>
+                            <td class="dyn-col">Wettbewerb um Mittel steigt. Erfolgreiche Projekte stärken Profil und Handlungsspielraum.</td>
+                            <td><span class="status-badge bg-green-500">Chance</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Wettbewerb um Studierende</td>
+                            <td class="weight-col">15 %</td>
+                            <td class="desc-col">Berlin ist ein starker Hochschulstandort mit vielen Alternativen für Studieninteressierte.</td>
+                            <td><span class="circle-badge">3</span></td>
+                            <td><span class="attr-badge bg-yellow-500">3.0</span></td>
+                            <td class="dyn-col">Die BHT muss ihre Praxisnähe, technischen Stärken und Identität klarer sichtbar machen.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Risiko</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Steigende Betriebs- und Energiekosten</td>
+                            <td class="weight-col">15 %</td>
+                            <td class="desc-col">Labore, Werkstätten, Gebäude und technische Infrastruktur verursachen hohe Kosten.</td>
+                            <td><span class="circle-badge">2</span></td>
+                            <td><span class="attr-badge bg-red-500">2.0</span></td>
+                            <td class="dyn-col">Steigende Kosten erhöhen Druck auf Effizienz, Sanierung und nachhaltigen Campusbetrieb.</td>
+                            <td><span class="status-badge bg-red-500">Risiko</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="gesellschaft" class="section-block">
+            <div class="section-header">
+                <h2>Gesellschaft</h2>
+                <div class="section-meta">
+                    Gewicht: <strong>20 %</strong> | <strong>4.0</strong> <span class="status-badge bg-green-500" style="margin-left: 10px;">Chance</span>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Umweltfaktoren</th>
+                            <th>Gewicht</th>
+                            <th>Bedeutung für die BHT</th>
+                            <th>Score</th>
+                            <th>Attraktivität</th>
+                            <th>Dynamik & Kontext</th>
+                            <th>Wertung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="factor-col">Demografische und soziale Vielfalt</td>
+                            <td class="weight-col">25 %</td>
+                            <td class="desc-col">Die BHT hat 12.096 Studierende. 18,95 Prozent sind internationale Studierende.</td>
+                            <td><span class="circle-badge">4</span></td>
+                            <td><span class="attr-badge bg-green-500">4.0</span></td>
+                            <td class="dyn-col">Vielfalt stärkt Offenheit und Internationalität, erfordert aber gute Beratung, Integration und klare Kommunikation.</td>
+                            <td><span class="status-badge bg-green-500">Chance</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Frauenanteil in technischen Studienfeldern</td>
+                            <td class="weight-col">20 %</td>
+                            <td class="desc-col">Der Frauenanteil liegt bei 35,02 Prozent und zeigt Potenzial für stärkere Gleichstellung.</td>
+                            <td><span class="circle-badge">3</span></td>
+                            <td><span class="attr-badge bg-yellow-500">3.0</span></td>
+                            <td class="dyn-col">Mehr Frauen in MINT Bereichen können Profil, Fachkräftebasis und gesellschaftliche Wirkung stärken.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Aufgabe</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Bildungsgerechtigkeit und sozialer Aufstieg</td>
+                            <td class="weight-col">20 %</td>
+                            <td class="desc-col">Als staatliche Hochschule bietet die BHT Zugang zu akademischer Bildung ohne private Studiengebühren.</td>
+                            <td><span class="circle-badge">4</span></td>
+                            <td><span class="attr-badge bg-green-500">4.0</span></td>
+                            <td class="dyn-col">Faire Bildungsbedingungen, gute Betreuung und bezahlbarer Zugang stärken gesellschaftliche Legitimation.</td>
+                            <td><span class="status-badge bg-green-500">Chance</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Erwartungen an moderne Studienbedingungen</td>
+                            <td class="weight-col">20 %</td>
+                            <td class="desc-col">Studierende erwarten digitale Services, gute Studienorganisation, Beratung und praxisnahe Lehre.</td>
+                            <td><span class="circle-badge">3</span></td>
+                            <td><span class="attr-badge bg-yellow-500">3.0</span></td>
+                            <td class="dyn-col">Verwaltungsprozesse, digitale Plattformen und Betreuung beeinflussen die wahrgenommene Qualität stark.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Risiko</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Gesellschaftliche Verantwortung</td>
+                            <td class="weight-col">15 %</td>
+                            <td class="desc-col">Die BHT soll Zukunftsthemen wie Nachhaltigkeit, Digitalisierung und Transformation aktiv bearbeiten.</td>
+                            <td><span class="circle-badge">5</span></td>
+                            <td><span class="attr-badge bg-green-500">5.0</span></td>
+                            <td class="dyn-col">Technische Bildung wird glaubwürdiger, wenn sie sichtbar mit Verantwortung und Gemeinwohl verbunden wird.</td>
+                            <td><span class="status-badge bg-green-600">Starke Chance</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="technologie" class="section-block">
+            <div class="section-header">
+                <h2>Technologie</h2>
+                <div class="section-meta">
+                    Gewicht: <strong>20 %</strong> | <strong>4.5</strong> <span class="status-badge bg-green-600" style="margin-left: 10px;">Starke Chance</span>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Umweltfaktoren</th>
+                            <th>Gewicht</th>
+                            <th>Bedeutung für die BHT</th>
+                            <th>Score</th>
+                            <th>Attraktivität</th>
+                            <th>Dynamik & Kontext</th>
+                            <th>Wertung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="factor-col">Technisches Hochschulprofil</td>
+                            <td class="weight-col">30 %</td>
+                            <td class="desc-col">Die BHT positioniert sich als Hochschule für Technik, angewandte Wissenschaft und Praxisnähe.</td>
+                            <td><span class="circle-badge">5</span></td>
+                            <td><span class="attr-badge bg-green-500">5.0</span></td>
+                            <td class="dyn-col">Das technische Profil ist glaubwürdig, unterscheidbar und direkt mit Zukunftsthemen verbunden.</td>
+                            <td><span class="status-badge bg-green-600">Starke Chance</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Digitalisierung der Lehre</td>
+                            <td class="weight-col">20 %</td>
+                            <td class="desc-col">Digitale Lernplattformen und hybride Formate beeinflussen Qualität, Flexibilität und Erreichbarkeit.</td>
+                            <td><span class="circle-badge">4</span></td>
+                            <td><span class="attr-badge bg-green-500">4.0</span></td>
+                            <td class="dyn-col">Studierende erwarten moderne digitale Services. Gleichzeitig braucht es Investitionen und Schulungen.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Risiko</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Künstliche Intelligenz</td>
+                            <td class="weight-col">20 %</td>
+                            <td class="desc-col">KI verändert Lehre, Forschung, Verwaltung, Prüfungen und spätere Berufsbilder.</td>
+                            <td><span class="circle-badge">5</span></td>
+                            <td><span class="attr-badge bg-green-500">5.0</span></td>
+                            <td class="dyn-col">Die BHT kann KI als Zukunftskompetenz aufgreifen, muss aber Fairness, Datenschutz und Prüfungsqualität sichern.</td>
+                            <td><span class="status-badge bg-green-500">Chance</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Labore, Werkstätten und technische Infrastruktur</td>
+                            <td class="weight-col">20 %</td>
+                            <td class="desc-col">Praxisnahe technische Ausbildung hängt stark von moderner Ausstattung ab.</td>
+                            <td><span class="circle-badge">4</span></td>
+                            <td><span class="attr-badge bg-green-500">4.0</span></td>
+                            <td class="dyn-col">Moderne Infrastruktur stärkt Praxisnähe. Veraltete Ausstattung wäre dagegen ein Profilrisiko.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Risiko</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Wissens- und Technologietransfer</td>
+                            <td class="weight-col">10 %</td>
+                            <td class="desc-col">Transfer verbindet Forschung, Wirtschaft, Stadtgesellschaft und Anwendung.</td>
+                            <td><span class="circle-badge">4</span></td>
+                            <td><span class="attr-badge bg-green-500">4.0</span></td>
+                            <td class="dyn-col">Praxisprojekte und Kooperationen können die BHT als Problemlöserin für Berlin-Brandenburg positionieren.</td>
+                            <td><span class="status-badge bg-green-500">Chance</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="oekologie" class="section-block">
+            <div class="section-header">
+                <h2>Ökologie</h2>
+                <div class="section-meta">
+                    Gewicht: <strong>15 %</strong> | <strong>4.0</strong> <span class="status-badge bg-yellow-500" style="margin-left: 10px;">Chance & Risiko</span>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Umweltfaktoren</th>
+                            <th>Gewicht</th>
+                            <th>Bedeutung für die BHT</th>
+                            <th>Score</th>
+                            <th>Attraktivität</th>
+                            <th>Dynamik & Kontext</th>
+                            <th>Wertung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="factor-col">Klimaschutz und Klima- und Umweltmanagement</td>
+                            <td class="weight-col">25 %</td>
+                            <td class="desc-col">Die BHT verfügt über Strukturen wie Klimabeirat und Klima- und Umweltmanagement.</td>
+                            <td><span class="circle-badge">4</span></td>
+                            <td><span class="attr-badge bg-green-500">4.0</span></td>
+                            <td class="dyn-col">Klimaschutz wird institutionell bearbeitet und kann Teil des Hochschulprofils werden.</td>
+                            <td><span class="status-badge bg-green-500">Chance</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Energieverbrauch und Gebäude</td>
+                            <td class="weight-col">25 %</td>
+                            <td class="desc-col">Labore, Werkstätten und Gebäude verursachen hohen Energie- und Sanierungsbedarf.</td>
+                            <td><span class="circle-badge">3</span></td>
+                            <td><span class="attr-badge bg-yellow-500">3.0</span></td>
+                            <td class="dyn-col">Hohe Kosten und Sanierungsdruck sind Risiken, bieten aber Potenzial für sichtbare Nachhaltigkeitsprojekte.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Risiko</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Nachhaltige Mobilität</td>
+                            <td class="weight-col">15 %</td>
+                            <td class="desc-col">Pendelverkehr, Dienstreisen und Exkursionen beeinflussen die ökologische Bilanz der Hochschule.</td>
+                            <td><span class="circle-badge">3</span></td>
+                            <td><span class="attr-badge bg-yellow-500">3.0</span></td>
+                            <td class="dyn-col">Mobilität ist für Studierende und Mitarbeitende relevant und kann durch digitale sowie nachhaltige Lösungen verbessert werden.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Risiko</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Nachhaltigkeit in Studiengängen und Forschung</td>
+                            <td class="weight-col">20 %</td>
+                            <td class="desc-col">Technische Studiengänge können Nachhaltigkeit, Ressourcen, Energie und Kreislaufwirtschaft praxisnah bearbeiten.</td>
+                            <td><span class="circle-badge">5</span></td>
+                            <td><span class="attr-badge bg-green-500">5.0</span></td>
+                            <td class="dyn-col">Ökologische Themen passen stark zur Identität einer technischen Hochschule mit gesellschaftlicher Verantwortung.</td>
+                            <td><span class="status-badge bg-green-600">Starke Chance</span></td>
+                        </tr>
+                        <tr>
+                            <td class="factor-col">Erwartungen der Öffentlichkeit</td>
+                            <td class="weight-col">15 %</td>
+                            <td class="desc-col">Als öffentliche Hochschule wird die BHT auch an ihrer ökologischen Vorbildfunktion gemessen.</td>
+                            <td><span class="circle-badge">4</span></td>
+                            <td><span class="attr-badge bg-green-500">4.0</span></td>
+                            <td class="dyn-col">Transparente Nachhaltigkeitskommunikation stärkt Vertrauen, fehlende Umsetzung kann Glaubwürdigkeit schwächen.</td>
+                            <td><span class="status-badge bg-yellow-500">Chance & Risiko</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

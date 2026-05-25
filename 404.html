@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In Konstruktion – BHT 2033</title>
+
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --text-main: #1e293b;
+      --primary-color: #0f172a;
+      --secondary-color: #1e3a8a;
+      --accent-color: #3b82f6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .bg-text {
+      position: absolute;
+      font-size: 22vw;
+      font-weight: 900;
+      opacity: 0.04;
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .wrapper {
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #93c5fd;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.95;
+      font-weight: 900;
+      margin-bottom: 30px;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    p {
+      max-width: 720px;
+      color: #cbd5e1;
+      font-size: 1.2rem;
+      line-height: 1.7;
+      margin-bottom: 50px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 28px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .card-number {
+      color: #93c5fd;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      line-height: 1.3;
+    }
+
+    .footer {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 26px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .primary {
+      background: var(--accent-color);
+      color: white;
+    }
+
+    .primary:hover {
+      transform: translateY(-4px);
+      background: #2563eb;
+    }
+
+    .secondary {
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .secondary:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 4rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .footer {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-text">404</div>
+
+  <div class="wrapper">
+
+    <div class="eyebrow">BHT 2033 · In Konstruktion</div>
+
+    <h1>
+      Hier entsteht<br>
+      gerade etwas.
+    </h1>
+
+    <p>
+      Diese Seite befindet sich aktuell noch im Aufbau.
+      Bald stehen hier weitere Inhalte, Analysen und Konzepte
+      rund um BHT 2033 zur Verfügung.
+    </p>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-number">STATUS</div>
+        <h2>In Konstruktion</h2>
+      </div>
+
+      <div class="card">
+        <div class="card-number">FORTSCHRITT</div>
+        <h2>Kaffee vorhanden</h2>
+      </div>
+
+      <div class="card">
+        <div class="card-number">SYSTEM</div>
+        <h2>Strategisches Chaos stabil</h2>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <a href="index.html" class="button primary">Zurück zur Startseite</a>
+      <a href="PESTEL-Analyse_BHT.html" class="button secondary">PESTEL-Analyse öffnen</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
+```
