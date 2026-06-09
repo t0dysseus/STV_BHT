@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stakeholder-Analyse – BHT 2033</title>
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --text-main: #1e293b;
+      --primary-color: #0f172a;
+      --secondary-color: #1e3a8a;
+      --accent-color: #3b82f6;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .header-banner {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .header-banner p {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .header-banner h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 20px auto 0 auto;
+      padding: 0 20px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s;
+    }
+
+    .back-link:hover {
+      transform: translateX(-4px);
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 20px auto 60px auto;
+      padding: 0 20px;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      border-left: 4px solid var(--accent-color);
+      padding-left: 12px;
+      margin-bottom: 25px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: #334155;
+    }
+
+    /* Matrix Styles - Pure HTML Table Layout representing the quadrants */
+    .matrix-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 15px;
+      margin: 30px 0;
+    }
+
+    .matrix-cell {
+      width: 50%;
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 25px;
+      vertical-align: top;
+    }
+
+    .matrix-cell.high-high {
+      border-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.03);
+    }
+
+    .quadrant-title {
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .title-key { color: #1e3a8a; background: #dbeafe; }
+    .title-keep { color: #15803d; background: #dcfce7; }
+    .title-show { color: #b45309; background: #fef3c7; }
+    .title-mon { color: #475569; background: #f1f5f9; }
+
+    .stakeholder-tag {
+      background: var(--primary-color);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    /* Details Table Styles */
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .details-table th, .details-table td {
+      border: 1px solid #e2e8f0;
+      padding: 14px;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .details-table th {
+      background-color: #f1f5f9;
+      color: var(--primary-color);
+      font-weight: 700;
+    }
+
+    .details-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .strategy-text {
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-banner">
+    <p>Kapitel 1 · Ausgangspunkt</p>
+    <h1>Stakeholder-Analyse (Macht-Interesse-Matrix)</h1>
+  </div>
+
+  <div class="nav-container">
+    <a href="index.html" class="back-link">← Zurück zum Strategie-Dashboard</a>
+  </div>
+
+  <main class="main-content">
+
+    <!-- BLOCK 1: DIE MATRIX -->
+    <div class="section-card">
+      <h2>1. Strategische Verortung im Zielsystem</h2>
+      <p>
+        Die Steuerung einer staatlichen Hochschule erfordert ein präzises Management kollidierender und komplementärer Interessen. Die folgende Matrix klassifiziert die primären Akteure der BHT anhand ihres Einflusses (Macht) und ihres Interesses am Transformationsprozess BHT 2033.
+      </p>
+
+      <table class="matrix-table">
+        <tr>
+          <!-- HOHE MACHT / HOHES INTERESSE -->
+          <td class="matrix-cell high-high">
+            <span class="quadrant-title title-key">Key Player (Kooperation)</span>
+            <p style="font-size:0.85rem; color:#64748b; margin-bottom:15px;">Eng einbinden, aktiv beteiligen und strategisch abstimmen.</p>
+            <div class="stakeholder-tag">Hochschulleitung</div>
+            <div class="stakeholder-tag">Senatsverwaltung (Wissenschaft)</div>
+            <div class="stakeholder-tag">Akademischer Senat</div>
+          </td>
+          
+          <!-- HOHE MACHT / GERINGES INTERESSE -->
+          <td class="matrix-cell">
+            <span class="quadrant-title title-keep">Keep Satisfied (Zufriedenstellen)</span>
+            <p style="font-size:0.85rem; color:#64748b; margin-bottom:15px;">Bedarfe erfüllen, Widerstände präventiv vermeiden.</p>
+            <div class="stakeholder-tag">Senatsverwaltung (Finanzen)</div>
+            <div class="stakeholder-tag">Akkreditierungsagenturen</div>
+            <div class="stakeholder-tag">Hauptpersonalrat</div>
+          </td>
+        </tr>
+        <tr>
+          <!-- GERINGE MACHT / HOHES INTERESSE -->
+          <td class="matrix-cell">
+            <span class="quadrant-title title-show">Keep Informed (Informiert halten)</span>
+            <p style="font-size:0.85rem; color:#64748b; margin-bottom:15px;">Kontinuierlich informieren, Einbindung über Foren sichern.</p>
+            <div class="stakeholder-tag">Studierende (AStA / StuPa)</div>
+            <div class="stakeholder-tag">Lehrkräfte / Mittelbau</div>
+            <div class="stakeholder-tag">Kooperationsunternehmen</div>
+          </td>
+          
+          <!-- GERINGE MACHT / GERINGES INTERESSE -->
+          <td class="matrix-cell">
+            <span class="quadrant-title title-mon">Minimal Effort (Überwachen)</span>
+            <p style="font-size:0.85rem; color:#64748b; margin-bottom:15px;">Beobachten, rein informative Kommunikation nutzen.</p>
+            <div class="stakeholder-tag">Allgemeine Öffentlichkeit</div>
+            <div class="stakeholder-tag">Lokale Nachbarschaft / Bezirke</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- BLOCK 2: DETAILANALYSE -->
+    <div class="section-card">
+      <h2>2. Detaillierte Stakeholder-Steckbriefe und Maßnahmen</h2>
+      <p>
+        Jede Stakeholdergruppe besitzt spezifische Erwartungshaltungen und birgt distinkte strategische Risiken für den Transformationsprozess.
+      </p>
+
+      <table class="details-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Stakeholder</th>
+            <th style="width: 30%;">Kerninteresse / Erwartung</th>
+            <th style="width: 25%;">Potenzielles Risiko</th>
+            <th style="width: 25%;">Strategische Maßnahme</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hochschulleitung</strong></td>
+            <td>Profilschärfung, Zukunftsfähigkeit, Erhöhung der Drittmittelquote, Markenreputation.</td>
+            <td>Überlastung administrativer Strukturen, interne Akzeptanzkonflikte.</td>
+            <td class="strategy-text">Enge Verzahnung des Präsidiums mit dezentralen Fachbereichsinitiativen.</td>
+          </tr>
+          <tr>
+            <td><strong>Senatsverwaltung (Wissenschaft)</strong></td>
+            <td>Erfüllung der Hochschulverträge, gesellschaftlicher Wandel, Effizienz.</td>
+            <td>Budgetrestriktionen, ordnungspolitische Eingriffe.</td>
+            <td class="strategy-text">Transparentes Reporting und Kopplung der KPIs an Berliner Entwicklungsziele.</td>
+          </tr>
+          <tr>
+            <td><strong>Studierende (AStA)</strong></td>
+            <td>Moderne digitale Lehre, Flexibilität, transparente Prüfungsverfahren, Partizipation.</td>
+            <td>Protest bei unzureichender Beteiligung, hohe Fluktuation.</td>
+            <td class="strategy-text">Institutionalisierte Feedbackschleifen und Co-Working-Formate bei Curricula-Reformen.</td>
+          </tr>
+          <tr>
+            <td><strong>Lehrkörper / Professoren</strong></td>
+            <td>Forschungsfreiheit, Entlastung in der Lehre, exzellente Laborausstattung.</td>
+            <td>Innovationsbremse durch Beharrungskräfte, Fokus auf Status Quo.</td>
+            <td class="strategy-text">Incentivierung von Green-Tech- und Transferprojekten; Abbau bürokratischer Hürden.</td>
+          </tr>
+          <tr>
+            <td><strong>Kooperationspartner (Wirtschaft)</strong></td>
+            <td>Praxisbereite Absolventen, direkter Zugang zu praxisnaher Forschung.</td>
+            <td>Abwanderung zu privaten oder forschungsstärkeren Universitäten.</td>
+            <td class="strategy-text">Ausbau dualer Studienplatzmodelle und agile Transferforen.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+</body>
+</html>
