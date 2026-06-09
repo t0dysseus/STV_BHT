@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SWOT & TOWS-Analyse – BHT 2033</title>
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --text-main: #1e293b;
+      --primary-color: #0f172a;
+      --secondary-color: #1e3a8a;
+      --accent-color: #3b82f6;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .header-banner {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .header-banner p {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .header-banner h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 20px auto 0 auto;
+      padding: 0 20px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s;
+    }
+
+    .back-link:hover {
+      transform: translateX(-4px);
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 20px auto 60px auto;
+      padding: 0 20px;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      border-left: 4px solid var(--accent-color);
+      padding-left: 12px;
+      margin-bottom: 25px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      color: var(--secondary-color);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: #334155;
+    }
+
+    /* 2x2 Matrix Layout for SWOT and TOWS */
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin: 25px 0;
+    }
+
+    @media (max-width: 768px) {
+      .matrix-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .matrix-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 25px;
+    }
+
+    .matrix-box.positive {
+      border-left: 4px solid #10b981;
+    }
+
+    .matrix-box.negative {
+      border-left: 4px solid #ef4444;
+    }
+
+    .matrix-box.strategy {
+      border-left: 4px solid var(--accent-color);
+      background: rgba(59, 130, 246, 0.02);
+    }
+
+    .tag-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    .tag-s { background: #dcfce7; color: #15803d; }
+    .tag-w { background: #fee2e2; color: #b91c1c; }
+    .tag-o { background: #dbeafe; color: #1e40af; }
+    .tag-t { background: #fef3c7; color: #9a3412; }
+    .tag-strat { background: #ede9fe; color: #6d28d9; }
+
+    ul {
+      margin-left: 20px;
+      list-style-type: square;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      color: #334155;
+    }
+
+    strong {
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-banner">
+    <p>Kapitel 4 · Strategie</p>
+    <h1>SWOT-Analyse & TOWS-Matrix</h1>
+  </div>
+
+  <div class="nav-container">
+    <a href="index.html" class="back-link">← Zurück zum Strategie-Dashboard</a>
+  </div>
+
+  <main class="main-content">
+
+    <!-- SEKTION 1: SWOT MATRIX -->
+    <div class="section-card">
+      <h2>1. Interne und externe Bestandsaufnahme (SWOT)</h2>
+      <p>
+        Die SWOT-Analyse führt die internen Stärken und Schwächen der BHT mit den externen Chancen und Risiken des Berliner Hochschulmarktes systematisch zusammen. Dies bildet die rein datenbasierte Grundlage für die strategische Ableitung.
+      </p>
+
+      <div class="matrix-grid">
+        <!-- STÄRKEN -->
+        <div class="matrix-box positive">
+          <span class="tag-title tag-s">Stärken (Strengths) – Intern</span>
+          <ul>
+            <li><strong>Kritische Masse:</strong> Über 12.000 Studierende ermöglichen signifikante Skalierungseffekte in Infrastruktur und Verwaltung.</li>
+            <li><strong>Regionale Verankerung:</strong> Exzellente Vernetzung mit der Berliner Industrie und mittelständischen Betrieben für den direkten Technologietransfer.</li>
+            <li><strong>Praxisorientiertes Profil:</strong> Stark ausgeprägte Anwendungsorientierung in den Ingenieur- und Naturwissenschaften.</li>
+          </ul>
+        </div>
+
+        <!-- SCHWÄCHEN -->
+        <div class="matrix-box negative">
+          <span class="tag-title tag-w">Schwächen (Weaknesses) – Intern</span>
+          <ul>
+            <li><strong>Inflexible Strukturen:</strong> Bürokratische Hemmnisse und lange Durchlaufzeiten bei administrativen Anpassungen.</li>
+            <li><strong>Silo-Strukturen:</strong> Geringe interdisziplinäre Kooperation zwischen den etablierten Fachbereichen.</li>
+            <li><strong>Ressourcenbindung:</strong> Hohe Fixkostenbelastung durch veraltete, nicht-dynamische Raumnutzungskonzepte.</li>
+          </ul>
+        </div>
+
+        <!-- CHANCEN -->
+        <div class="matrix-box positive">
+          <span class="tag-title tag-o">Chancen (Opportunities) – Extern</span>
+          <ul>
+            <li><strong>Urbane Transformation:</strong> Massiver Berliner Bedarf an Expertise in Green Tech, humanoider Robotik und Transformationsdesign.</li>
+            <li><strong>Lebenslanges Lernen:</strong> Steigende Marktnachfrage nach modularisierten Weiterbildungen und Quereinstiegen (Zweiter Bildungsweg).</li>
+            <li><strong>Digitale Ökosysteme:</strong> Potenziale für End-to-End-automatisierte Prozesse und agile StartUp-Kooperationen.</li>
+          </ul>
+        </div>
+
+        <!-- RISIKEN -->
+        <div class="matrix-box negative">
+          <span class="tag-title tag-t">Risiken (Threats) – Extern</span>
+          <ul>
+            <li><strong>Wettbewerbsdruck:</strong> Aggressives Wachstum privater Bildungsanbieter mit agileren Strukturen in Berlin.</li>
+            <li><strong>Budgetrestriktionen:</strong> Unvorhersehbare Schwankungen oder Kürzungen in den staatlichen Hochschulverträgen.</li>
+            <li><strong>Demografischer Wandel:</strong> Verschärfter Kampf um nationale und internationale Talente sowie Lehrkräfte.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEKTION 2: TOWS MATRIX -->
+    <div class="section-card">
+      <h2>2. TOWS-Matrix: Strategische Optionen & Ableitungen</h2>
+      <p>
+        Aus der bloßen Gegenüberstellung der SWOT-Faktoren werden hier konkrete, relationale Handlungsstrategien generiert. Die TOWS-Matrix verknüpft die Dimensionen systematisch.
+      </p>
+
+      <div class="matrix-grid">
+        <!-- SO STRATEGIEN -->
+        <div class="matrix-box strategy">
+          <span class="tag-title tag-strat">SO-Strategien (Ausbauen)</span>
+          <h3>Stärken nutzen, um Chancen zu ergreifen</h3>
+          <ul>
+            <li><strong>Technologische Speerspitzen forcieren:</strong> Nutzung der regionalen Industrie-Vernetzung (S2), um die BHT als Berliner Marktführer für humane Robotik und urbane Transformation (O1) zu positionieren.</li>
+            <li><strong>Zielgruppen-Erweiterung:</strong> Das praxisnahe Profil (S3) nutzen, um passgenaue Micro-Credentials für den zweiten Bildungsweg (O2) zu entwickeln.</li>
+          </ul>
+        </div>
+
+        <!-- WO STRATEGIEN -->
+        <div class="matrix-box strategy">
+          <span class="tag-title tag-strat">WO-Strategien (Aufholen)</span>
+          <h3>Schwächen minimieren durch Chancen</h3>
+          <ul>
+            <li><strong>Silo-Strukturen aufbrechen:</strong> Nutzung des Transformationsdrucks (O1), um fächerübergreifende, interdisziplinäre Forschungs- und Projektcluster einzurichten und Fachbereichsgrenzen (W2) abzubauen.</li>
+            <li><strong>Prozess-Modernisierung:</strong> Integration digitaler Ökosysteme (O3), um administrative Inflexibilitäten (W1) konsequent mittels End-to-End-Automatisierung aufzulösen.</li>
+          </ul>
+        </div>
+
+        <!-- ST STRATEGIEN -->
+        <div class="matrix-box strategy">
+          <span class="tag-title tag-strat">ST-Strategien (Absichern)</span>
+          <h3>Stärken nutzen, um Risiken zu kontern</h3>
+          <ul>
+            <li><strong>Skalierung gegen Budgetdruck:</strong> Die kritische Masse von 12.000 Studierenden (S1) nutzen, um durch administrative Standardisierung Kostenvorteile gegen staatliche Budgetrestriktionen (T2) abzusichern.</li>
+            <li><strong>Talentsicherung via Industrie:</strong> Durch exklusive Partnerschaften mit der Wirtschaft (S2) garantierte Übernahmeperspektiven schaffen, um sich im Wettbewerb um Talente (T3) abzugrenzen.</li>
+          </ul>
+        </div>
+
+        <!-- WT STRATEGIEN -->
+        <div class="matrix-box strategy">
+          <span class="tag-title tag-strat">WT-Strategien (Vermeiden)</span>
+          <h3>Schwächen abbauen und Risiken umgehen</h3>
+          <ul>
+            <li><strong>Asset-Sharing forcieren:</strong> Rigide Raumkonzepte (W3) durch dynamische Belegungssoftware auflösen, um fixkostenbedingten Risiken bei sinkenden Budgets (T2) präventiv entgegenzuwirken.</li>
+            <li><strong>Agilisierung gegen private Anbieter:</strong> Bürokratische Hürden (W1) abbauen, um die Reaktionsgeschwindigkeit bei Curricula-Anpassungen gegenüber privaten, agilen Mitbewerbern (T1) zu sichern.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>
