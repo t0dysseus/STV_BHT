@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BHT 2033</title>
+  <title>BHT 2033 – STV</title>
 
   <style>
     :root {
@@ -13,8 +12,8 @@
       --primary-color: #0f172a;
       --secondary-color: #1e3a8a;
       --accent-color: #3b82f6;
-      --card-bg: #ffffff;
-      --border-color: #e2e8f0;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --border-color: rgba(255, 255, 255, 0.12);
     }
 
     * {
@@ -41,7 +40,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
     }
 
     .container {
@@ -51,7 +50,7 @@
 
     .title {
       color: white;
-      margin-bottom: 70px;
+      margin-bottom: 60px;
     }
 
     .title p {
@@ -60,155 +59,384 @@
       color: #94a3b8;
       margin-bottom: 20px;
       font-weight: 600;
+      font-size: 0.95rem;
     }
 
     .title h1 {
-      font-size: clamp(3rem, 8vw, 7rem);
-      line-height: 1;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1.1;
       font-weight: 900;
+      letter-spacing: -1px;
     }
 
-    .grid {
+    /* 6 Chapters Layout Grid */
+    .chapters-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 25px;
     }
 
-    .card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
-      padding: 35px;
-      color: white;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-      min-height: 180px;
+    @media (max-width: 1200px) {
+      .chapters-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 750px) {
+      .chapters-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chapter-block {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
       display: flex;
       flex-direction: column;
+      min-height: 340px;
+    }
+
+    /* Accordion Header Style */
+    .chapter-toggle-btn {
+      background: none;
+      border: none;
+      color: left;
+      text-align: left;
+      width: 100%;
+      cursor: pointer;
+      display: block;
+      padding: 0;
+    }
+
+    .chapter-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding-bottom: 12px;
+      margin-bottom: 15px;
+      display: flex;
       justify-content: space-between;
+      align-items: baseline;
+      transition: border-color 0.2s;
     }
 
-    .card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.1);
+    .chapter-block:hover .chapter-header {
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
-    .number {
-      font-size: 0.9rem;
+    .chapter-num {
+      font-size: 0.8rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: #93c5fd;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-
-    .card h2 {
-      font-size: 1.6rem;
-      line-height: 1.2;
       font-weight: 800;
     }
 
-    .arrow {
-      margin-top: 30px;
-      font-size: 1.2rem;
+    .chapter-title {
+      font-size: 1.35rem;
+      color: white;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
+
+    /* Core Summary Box (Starts hidden, expands via JS) */
+    .chapter-summary-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.35s ease-out;
+      opacity: 0;
+      margin-bottom: 0;
+    }
+
+    .chapter-summary-content.active {
+      max-height: 500px;
+      opacity: 1;
+      margin-bottom: 20px;
+    }
+
+    .summary-inner-text {
+      font-size: 0.85rem;
+      line-height: 1.45;
       color: #93c5fd;
-      transition: transform 0.3s ease;
+      background: rgba(59, 130, 246, 0.1);
+      border-left: 3px solid var(--accent-color);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      font-weight: 500;
     }
 
-    .card:hover .arrow {
-      transform: translateX(8px);
+    /* Inner Cards Layout */
+    .sub-links-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      
     }
 
-    @media (max-width: 700px) {
-      .title {
-        margin-bottom: 50px;
-      }
+    .sub-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
 
-      .card {
-        min-height: 150px;
-      }
+    .sub-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateX(4px);
+    }
+
+    .sub-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .sub-card p {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 3px;
+      line-height: 1.3;
+    }
+
+    .sub-arrow {
+      color: #93c5fd;
+      font-weight: bold;
+      font-size: 1rem;
+      padding-left: 10px;
     }
   </style>
 </head>
 <body>
 
-  <section class="hero">
+  <section class="hero" style="position: relative;">
+    <!-- Logo Container Top Right -->
+    <div style="position: absolute; top: 40px; right: 40px; max-width: 220px; z-index: 10;">
+      <img src="BHT_Logo_horizontal_Negativ.svg" alt="BHT Logo" style="width: 100%; height: auto; display: block;" />
+    </div>
     <div class="container">
 
       <div class="title">
-        <p>Semesterprojekt</p>
+        <p>Strategie, Transformation & Veränderung</p>
         <h1>
-          Strategie,<br>
-          Transformation,<br>
-          Verantwortung:<br>
+          
           BHT 2033
         </h1>
       </div>
 
-      <div class="grid">
+      <div class="chapters-grid">
 
-        <a href="PESTEL-Analyse_BHT.html" class="card">
-          <div>
-            <div class="number">01</div>
-            <h2>PESTEL-Analyse</h2>
+        <!-- KAPITEL 1: AUSGANGSPUNKT -->
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Ausgangspunkt</h2>
+              <span class="chapter-num">Kapitel 1</span>
+            </div>
+          </button>
+          
+          <!-- Accordion Text Block -->
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              Die BHT agiert in einem dichten Berliner Bildungsumfeld mit hohem politischen und regulatorischen Druck. Gleichzeitig fordern über 12.000 Studierende und das Kollegium eine stärkere Beteiligung an strategischen Prozessen ein. Die Verzahnung von Makro-Trends und internen Kräften bildet die rationale Basis für jede weitere Veränderung.
+            </div>
           </div>
-          <div class="arrow">→</div>
-        </a>
 
-        <a href="404.html" class="card">
-          <div>
-            <div class="number">02</div>
-            <h2>Stakeholder-Analyse</h2>
+          <div class="sub-links-container">
+            <a href="PESTEL-Analyse_BHT.html" class="sub-card">
+              <div>
+                <h3>PESTEL-Analyse</h3>
+                <p>Makro-Umfeld des Berliner Bildungsmarktes</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+            <a href="stakeholder.html" class="sub-card">
+              <div>
+                <h3>Stakeholder-Analyse</h3>
+                <p>Macht-Interesse-Matrix der BHT-Akteure</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
           </div>
-          <div class="arrow">→</div>
-        </a>
+        </div>
 
-        <a href="404.html" class="card">
-          <div>
-            <div class="number">03</div>
-            <h2>Geschäftsmodell / Business Model Canvas</h2>
-          </div>
-          <div class="arrow">→</div>
-        </a>
+        <!-- KAPITEL 2: IDENTITÄT -->
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Identität</h2>
+              <span class="chapter-num">Kapitel 2</span>
+            </div>
+          </button>
 
-        <a href="404.html" class="card">
-          <div>
-            <div class="number">04</div>
-            <h2>Vision</h2>
+          <!-- Accordion Text Block -->
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              Das aktuelle Geschäftsmodell der BHT basiert auf praxisnaher Lehre und regional stark verankertem Technologietransfer. Die ökonomische Absicherung erfolgt primär über staatliche Budgets und leistungsorientierte Hochschulverträge. Um zukunftsfähig zu bleiben, muss die bestehende Wertschöpfung konsequent auf neue gesellschaftliche Herausforderungen ausgerichtet werden.
+            </div>
           </div>
-          <div class="arrow">→</div>
-        </a>
 
-        <a href="404.html" class="card">
-          <div>
-            <div class="number">05</div>
-            <h2>Mission</h2>
+          <div class="sub-links-container">
+            <a href="canvas.html" class="sub-card">
+              <div>
+                <h3>Business Model Canvas</h3>
+                <p>Geschäftsmodell und ökonomischer Status Quo</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
           </div>
-          <div class="arrow">→</div>
-        </a>
+        </div>
 
-        <a href="404.html" class="card">
-          <div>
-            <div class="number">06</div>
-            <h2>Strategische Marktanalyse</h2>
-          </div>
-          <div class="arrow">→</div>
-        </a>
+        <!-- KAPITEL 3: AMBITION -->
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Ambition</h2>
+              <span class="chapter-num">Kapitel 3</span>
+            </div>
+          </button>
 
-        <a href="404.html" class="card">
-          <div>
-            <div class="number">07</div>
-            <h2>SWOT & TOWS</h2>
+          <!-- Accordion Text Block -->
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              Das normative Zielbild definiert, wofür die BHT im Jahr 2033 als Institution stehen will. Die Ausarbeitung trennt scharf zwischen dem langfristigen, inspirierenden Zukunftshorizont und dem unmittelbaren gesellschaftlichen Handlungsauftrag. Dadurch entsteht ein verbindlicher Kompass für die gesamte Organisation.
+            </div>
           </div>
-          <div class="arrow">→</div>
-        </a>
+
+          <div class="sub-links-container">
+            <a href="404.html" class="sub-card">
+              <div>
+                <h3>Vision</h3>
+                <p>Das langfristige normative Zukunftsbild</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+            <a href="404.html" class="sub-card">
+              <div>
+                <h3>Mission</h3>
+                <p>Der gesellschaftliche Auftrag und Daseinszweck</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- KAPITEL 4: STRATEGIE -->
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Strategie</h2>
+              <span class="chapter-num">Kapitel 4</span>
+            </div>
+          </button>
+
+          <!-- Accordion Text Block -->
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              Aus der Synthese von Marktbewegungen und internen Kompetenzen werden handfeste strategische Optionen entwickelt. Die qualitative Positionierung im Berliner Wettbewerb sichert das Alleinstellungsmerkmal der Hochschule. Durch die logische Verknüpfung von Stärken und Risiken werden konkrete Stoßrichtungen messbar gemacht.
+            </div>
+          </div>
+
+          <div class="sub-links-container">
+            <a href="404.html" class="sub-card">
+              <div>
+                <h3>Strategische Marktanalyse</h3>
+                <p>Positionierung im Berliner Hochschulwettbewerb</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+            <a href="404.html" class="sub-card">
+              <div>
+                <h3>SWOT & TOWS</h3>
+                <p>Strategische Optionen und Verknüpfungen</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- KAPITEL 5: TRANSFORMATION -->
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Transformation</h2>
+              <span class="chapter-num">Kapitel 5</span>
+            </div>
+          </button>
+
+          <!-- Accordion Text Block -->
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              Die strategischen Ziele werden in ein lebendiges Orientierungssystem und operative Prozesse übersetzt. Hierzu gehört die Modernisierung der administrativen Abläufe ebenso wie die Befähigung agilerer Entscheidungsstrukturen. So wird sichergestellt, dass die Strategie nicht nur auf dem Papier existiert, sondern gelebt wird.
+            </div>
+          </div>
+
+          <div class="sub-links-container">
+            <a href="404.html" class="sub-card">
+              <div>
+                <h3>Leitbild</h3>
+                <p>Strategische Leitlinien und Orientierungssystem</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+            <a href="404.html" class="sub-card">
+              <div>
+                <h3>Aufbau- und Ablauforganisation</h3>
+                <p>Strukturelle und prozessuale Transformation</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- KAPITEL 6: VERANTWORTUNG -->
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Verantwortung</h2>
+              <span class="chapter-num">Kapitel 6</span>
+            </div>
+          </button>
+
+          <!-- Accordion Text Block -->
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              Als urbane Bildungsinstitution verankert die BHT ökologische und gesellschaftliche Nachhaltigkeit im Kern ihrer Governance. Die Ausrichtung an harten Nachhaltigkeitszielen macht den gesellschaftlichen Beitrag messbar und transparent. Verantwortung ist damit das finale qualitative Kontrollorgan aller strategischen Maßnahmen.
+            </div>
+          </div>
+
+          <div class="sub-links-container">
+            <a href="404.html" class="sub-card">
+              <div>
+                <h3>Nachhaltige (Unternehmens-) Ziele</h3>
+                <p>Gesellschaftliche Verantwortung und Nachhaltigkeits-KPIs</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
 
       </div>
 
     </div>
   </section>
 
+  <!-- Incredibly lean and native toggle script -->
+  <script>
+    function toggleSummary(button) {
+      // Find the summary element inside the same card
+      const block = button.closest('.chapter-block');
+      const content = block.querySelector('.chapter-summary-content');
+      
+      // Toggle class
+      content.classList.toggle('active');
+    }
+  </script>
+
 </body>
 </html>
-```
