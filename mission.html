@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mission & Gesellschaftlicher Auftrag – BHT 2033</title>
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --text-main: #1e293b;
+      --primary-color: #0f172a;
+      --secondary-color: #1e3a8a;
+      --accent-color: #3b82f6;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .header-banner {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .header-banner p {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .header-banner h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 20px auto 0 auto;
+      padding: 0 20px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s;
+    }
+
+    .back-link:hover {
+      transform: translateX(-4px);
+    }
+
+    .main-content {
+      max-width: 1100px;
+      margin: 20px auto 60px auto;
+      padding: 0 20px;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .mission-statement-box {
+      background: linear-gradient(to right, #eff6ff, #f0fdf4);
+      border-left: 5px solid #3b82f6;
+      padding: 25px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 30px;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: #1e3a8a;
+      font-weight: 500;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      border-left: 4px solid var(--accent-color);
+      padding-left: 12px;
+      margin-bottom: 25px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      color: var(--secondary-color);
+      margin-top: 25px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: #334155;
+      font-size: 1rem;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 20px;
+      list-style-type: square;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: #334155;
+      font-size: 0.98rem;
+    }
+
+    strong {
+      color: var(--primary-color);
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .grid-two {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .inner-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-banner">
+    <p>Kapitel 2 · Strategisches Fundament</p>
+    <h1>Mission & Gesellschaftlicher Auftrag</h1>
+  </div>
+
+  <div class="nav-container">
+    <a href="index.html" class="back-link">← Zurück zum Strategie-Dashboard</a>
+  </div>
+
+  <main class="main-content">
+
+    <div class="section-card">
+      <h2>Das offizielle Missions-Statement</h2>
+      <div class="mission-statement-box">
+        „Die Mission der BHT ist es, praxisnahe und zugängliche technische Lerninhalte für Menschen mit unterschiedlichsten Berufswegen verfügbar zu machen. Ergänzend dazu entwickelt die Hochschule durch anwendungsorientierte Forschung konkrete, technologische Lösungen im direkten Austausch mit der Wirtschaft und Gesellschaft.“
+      </div>
+      <p>
+        Dieses Statement artikuliert das doppelte Leistungsversprechen der Berliner Hochschule für Technik: Die Demokratisierung der akademischen und technologischen Bildung sowie die Funktion als regionaler und überregionaler Innovationsmotor.
+      </p>
+    </div>
+
+    <!-- STRATEGISCHE IMPLIKATIONEN FÜR DIE LEHRE -->
+    <div class="section-card">
+      <h2>1. Strategische Implikationen für die Lehre</h2>
+      <p>
+        Die Verpflichtung zu Zugänglichkeit und Praxisnähe erfordert eine fundamentale Weiterentwicklung der akademischen Infrastruktur und Didaktik, um Studierende unabhängig von ihrer Vorbildung zum Erfolg zu führen.
+      </p>
+
+      <h3>A. Durchlässigkeit und flexible Bildungspfade</h3>
+      <ul>
+        <li><strong>Anerkennung non-formaler Kompetenzen:</strong> Etablierung standardisierter Verfahren zur Anrechnung beruflicher Qualifikationen (z.B. aus handwerklichen oder industriellen Ausbildungen) auf das Studium, um Bildungsbiografien zu verkürzen.</li>
+        <li><strong>Modulare Studienstrukturen:</strong> Aufbrechen starrer Curricula zugunsten von stapelbaren Zertifikatseinheiten (Stackable Degrees) und Micro-Credentials, die ein berufsbegleitendes Studieren im eigenen Rhythmus erlauben.</li>
+        <li><strong>Didaktische Abholpunkte:</strong> Implementierung vorgelagerter mathematisch-naturwissenschaftlicher Brückenkurse und begleitender Mentoring-Programme zur Nivellierung heterogener Eingangskompetenzen.</li>
+      </ul>
+
+      <h3>B. Radikale Praxisnähe</h3>
+      <ul>
+        <li><strong>Inverted-Classroom-Modelle:</strong> Verlagerung der theoretischen Wissensvermittlung in digitale Selbstlernphasen, um die wertvolle Präsenzzeit auf dem Campus exklusiv für kollaboratives Arbeiten in modernen Laboratorien und Werkstätten zu nutzen.</li>
+        <li><strong>Projektbasierte Lehre:</strong> Systematische Integration realer Problemstellungen aus der industriellen Praxis in die regulären Modulprüfungen (z.B. im Rahmen von Hackathons oder interdisziplinären Semesterprojekten).</li>
+      </ul>
+    </div>
+
+    <!-- STRATEGISCHE IMPLIKATIONEN FÜR FORSCHUNG & TRANSFER -->
+    <div class="section-card">
+      <h2>2. Strategische Implikationen für Forschung & Transfer</h2>
+      <p>
+        Anwendungsorientierte Forschung wird an der BHT nicht als Elfenbeinturm-Wissenschaft verstanden, sondern als direkte Co-Creation zur Lösung akuter gesellschaftlicher und industrieller Herausforderungen.
+      </p>
+
+      <div class="grid-two">
+        <div class="inner-box">
+          <h3>Direkter Austausch mit der Wirtschaft</h3>
+          <ul>
+            <li><strong>Reallabore & Joint Labs:</strong> Aufbau physischer Innovationsflächen auf dem Campus, auf denen Forschende, Studierende und Partnerunternehmen gemeinsam an Prototypen (z.B. in den Bereichen Smarte Stadt, Dekarbonisierung, Medizintechnik) arbeiten.</li>
+            <li><strong>Agiler Technologietransfer:</strong> Verschlankung der administrativen Prozesse bei der Anmeldung von Patenten und der Ausgründung von forschungsnahen Start-ups (Spin-offs).</li>
+          </ul>
+        </div>
+
+        <div class="inner-box">
+          <h3>Rückkopplung in die Gesellschaft</h3>
+          <ul>
+            <li><strong>Citizen Science & Open Science:</strong> Einbindung von Bürgerinnen und Bürgern in ökologische oder urbane Forschungsprojekte, um Akzeptanz und direkten Nutzen technologischer Innovationen transparent zu machen.</li>
+            <li><strong>Zukunftsorientierter Wissenstransfer:</strong> Durchführung öffentlicher Diskurs- und Transferformate, um wissenschaftliche Erkenntnisse verständlich und nutzbar in den Berliner Stadtraum zu tragen.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>
