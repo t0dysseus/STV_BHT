@@ -1,274 +1,470 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>#BushaltestelleZukunft</title>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BHT 2033 – STV</title>
 
-<style>
-:root {
-  --text: #1d1d1b;
-  --muted: #6b6b6b;
-  --border: #ececec;
-  --bg-soft: #ffffff;
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --text-main: #1e293b;
+      --primary-color: #0f172a;
+      --secondary-color: #1e3a8a;
+      --accent-color: #3b82f6;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --border-color: rgba(255, 255, 255, 0.12);
+    }
 
-  --hero-blue: #39509e;
-  --hero-green: #b2dde4;
-  --hero-orange: #ef7d18;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
-body {
-  margin: 0;
-  padding: 0;
-  background: #fff;
-  font-family: 'Atkinson Hyperlegible', sans-serif;
-  color: var(--text);
-  overflow-x: hidden; /* Verhindert horizontales Scrollen durch die großen Vektoren */
-}
+    body {
+      background: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
 
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 55vh;
-  overflow: hidden;
-  z-index: 0;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-/* Verhindert das Verzerren der Formen und hält sie im richtigen Seitenverhältnis */
-.hero-bg svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px;
+    }
 
-/* Drückt die Formen aktiv nach links und rechts außen über den Rand */
-#Ebene_2 {
-  transform: translate(-180px, -60px); 
-}
+    .container {
+      width: 100%;
+      max-width: 1400px;
+    }
 
-#Ebene_3 {
-  transform: translate(120px, -40px);
-}
+    .title {
+      color: white;
+      margin-bottom: 60px;
+    }
 
-.content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 60px 24px;
-  box-sizing: border-box;
-}
+    .title p {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
 
-header {
-  margin-bottom: 50px;
-}
+    .title h1 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
 
-h1 {
-  font-size: clamp(40px, 7vw, 64px);
-  font-weight: 700;
-  margin: 0 0 16px 0;
-  line-height: 1.1;
-}
+    /* Grid Layout */
+    .chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
 
-.hashtag {
-  display: inline-block;
-  background: var(--text);
-  color: #fff;
-  padding: 6px 16px;
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 24px;
-}
+    @media (max-width: 1200px) {
+      .chapters-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-header p {
-  font-size: 22px;
-  line-height: 1.5;
-  color: #333;
-  max-width: 800px;
-  margin: 0;
-}
+    @media (max-width: 750px) {
+      .chapters-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
-/* AKKORDEON / AUFKLAPP-CONTAINER */
-.accordion-group {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin-top: 40px;
-}
+    .chapter-block {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+    }
 
-.accordion-item {
-  border: 4px solid var(--text);
-  border-radius: 16px;
-  background: #fff;
-  overflow: hidden;
-}
+    /* Accordion Header Style */
+    .chapter-toggle-btn {
+      background: none;
+      border: none;
+      color: left;
+      text-align: left;
+      width: 100%;
+      cursor: pointer;
+      display: block;
+      padding: 0;
+    }
 
-.accordion-trigger {
-  width: 100%;
-  background: none;
-  border: none;
-  padding: 28px 32px;
-  font-family: 'Atkinson Hyperlegible', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  text-align: left;
-  color: var(--text);
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background-color 0.2s;
-}
+    .chapter-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      transition: border-color 0.2s;
+    }
 
-.accordion-trigger:hover {
-  background-color: var(--bg-soft);
-}
+    .chapter-block:hover .chapter-header {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
 
-.accordion-icon {
-  font-size: 24px;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+    .chapter-num {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #93c5fd;
+      font-weight: 800;
+    }
 
-/* INTERAKTIVER PANEL-EFFEKT */
-.accordion-panel {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
-  padding: 0 32px;
-}
+    .chapter-title {
+      font-size: 1.35rem;
+      color: white;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
 
-.accordion-item.active .accordion-panel {
-  max-height: 2000px;
-  padding-bottom: 32px;
-}
+    /* Core Summary Box */
+    .chapter-summary-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.35s ease-out;
+      opacity: 0;
+      margin-bottom: 0;
+    }
 
-.accordion-item.active .accordion-icon {
-  transform: rotate(180deg);
-}
+    .chapter-summary-content.active {
+      max-height: 500px;
+      opacity: 1;
+      margin-bottom: 20px;
+    }
 
-.accordion-panel p {
-  font-size: 18px;
-  line-height: 1.6;
-  margin: 0 0 20px 0;
-}
+    .summary-inner-text {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.1);
+      border-left: 3px solid var(--accent-color);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      font-weight: 500;
+    }
 
-.panel-img {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid var(--text);
-  margin-top: 16px;
-}
+    /* Inner Cards Layout */
+    .sub-links-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
-footer {
-  margin-top: 60px;
-  text-align: center;
-  border-top: 4px solid var(--text);
-  padding-top: 40px;
-}
+    .sub-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
 
-footer p {
-  font-size: 20px;
-  font-weight: 700;
-  margin: 0;
-}
-</style>
+    .sub-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateX(4px);
+    }
+
+    .sub-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .sub-card p {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 3px;
+      line-height: 1.3;
+    }
+
+    .sub-arrow {
+      color: #93c5fd;
+      font-weight: bold;
+      font-size: 1rem;
+      padding-left: 10px;
+    }
+  </style>
 </head>
-
 <body>
 
-  <div class="hero-bg">
-    <!-- preserveAspectRatio geändert auf "xMidYMid slice" für randloses Hinausfliegen ohne Verzerrung -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1909.03 1088.18" preserveAspectRatio="xMidYMid slice">
-      <g id="Ebene_3" data-name="Ebene 3">
-        <path d="M583.33,980.6c-43.24,73.94-102.61,119.52-190.61,104.85-72.07-12.02-174.06-96.03-219.32-152.65-45.14-56.47-67.08-118.16-49.77-190.08,28.48-118.36,101.08-78.04,186.03-105.86,39.47-12.93,46.5-30.15,73.54-57.5,12.9-13.06,17.77-14.21,34.99-8.13,53.45,18.87,106.28,97.85,130.03,147.8,23.54,49.52,49.09,124.07,53.49,178.6,2.62,32.52-1.83,54.68-18.38,82.98Z" fill="#ee7d18"/>
-        <path d="M1888.64,376.25c17.33,31.79,22.53,61.18,19.63,96.85-2.46,30.22-8.4,43.14-36.58,57.92-33.81,17.73-70.29-7.08-104.52-11.05-14.08-1.64-34.81-.64-48.23,3.9-43.77,14.8-80.53,63.66-128.4,34.89-39.55-23.77-46.2-71.06-58.51-110.86-16.56-53.52-45.73-109.57-75.45-157.09-14.25-22.8-38.31-51.64-42.56-78.59-2.32-14.73,13.86-26.33,24.8-33.66,23.31-15.62,65.61-28.37,93.62-32.1,50.87-6.76,112.82,20.68,155.89,46.03,69.03,40.63,161.64,112.83,200.31,183.76Z" fill="#39509d"/>
-      </g>
-      <g id="Ebene_2" data-name="Ebene 2">
-        <path d="M338.92,24.56c50.02-22.23,107.85-41.31,153.9-1.18,40.46,35.26,57.99,90.11,9.03,126.75-31.82,23.82-67.97,30.46-99.85,58.91-64.79,57.82-36.33,102.31-24.46,174.18,5.99,36.24,15.56,108.16-3.1,140.02-56.42,96.33-230.43,96.65-298.32,14.08C39.12,492.34-8.22,391.04,1.22,332.59c11.46-71.01,117.7-160.06,173.04-203.3,50.8-39.69,105.41-78.39,164.66-104.72Z" fill="#b0dce3"/>
-        <path d="M1702.93,593.95c30.55-39.71,69.03-28.51,102.95.27,58.39,49.54,59.99,170.32,61.09,241.91.27,17.68,3.18,44.45-9.49,58.28-20.98,22.92-58.24,3.07-82-4.59-27.08-8.73-44.72,6.99-71.55-8.24-58.78-33.36-44.69-115.51-37.1-171.71,4.75-35.21,14.17-87.43,36.1-115.93Z" fill="#ca5482"/>
-      </g>
-    </svg>
-  </div>
-
-<div class="content">
-  <header>
-    <div class="hashtag">#BushaltestelleZukunft</div>
-    <h1>Das Experiment.<br>Die Auflösung.</h1>
-    <p>Klickt auf die einzelnen Schritte. Dann seht ihr, was wir aus euren Ideen gemacht haben. Ihr erfahrt auch, wer wir sind.</p>
-  </header>
-
-  <main class="accordion-group">
-    <div class="accordion-item">
-      <button class="accordion-trigger">
-        <span>01 / Wir haben zugehört</span>
-        <span class="accordion-icon">▼</span>
-      </button>
-      <div class="accordion-panel">
-        <p>Alles begann mit eurer Perspektive. Um zu verstehen, wie euer Alltag hier aussieht, was euch bewegt und was euch vielleicht noch fehlt, haben wir im Vorfeld viele intensive Interviews mit euch geführt. Ihr habt uns einen ehrlichen Einblick in euer Leben am Standort Sickinger Straße gegeben. Dabei wurde schnell klar: Es braucht einen Ort für Austausch, Wünsche und Sichtbarkeit. <strong>Vielen Dank für euren wertvollen Input!</strong></p>
-        <img class="panel-img" src="images/zugehoert_01.jpeg" alt="Wir haben zugehört">
-      </div>
+  <section class="hero" style="position: relative;">
+    <div style="position: absolute; top: 40px; right: 40px; max-width: 220px; z-index: 10;">
+      <img src="BHT_Logo_horizontal_Negativ.svg" alt="BHT Logo" style="width: 100%; height: auto; display: block;" />
     </div>
+    <div class="container">
 
-    <div class="accordion-item">
-      <button class="accordion-trigger">
-        <span>02 / Wir haben gebaut & verändert</span>
-        <span class="accordion-icon">▼</span>
-      </button>
-      <div class="accordion-panel">
-        <p>Weil Reden allein nichts verändert, haben wir eure Impulse genommen und eine temporäre Intervention gestartet: Die Bushaltestelle in der Raucherecke wurde zum Leben erweckt! Erst haben wir den Raum aufgemacht, um euren alltäglichen Treffpunkt aufzuwerten und euch mit den Tickets eine Stimme zu geben. <strong>Danke, dass ihr so stark mit den Tickets interagiert habt!</strong> Zwei Tage später haben wir ihn gezielt zugemacht – eine bewusste Irritation, um zu spüren, was passiert, wenn dieser wichtige soziale Ankerpunkt plötzlich fehlt. Dadurch wurde allen klar, wie wertvoll dieser Raum für euren Austausch eigentlich ist.</p>
-        <img class="panel-img" src="images/gebastelt_01.jpg" alt="Wir haben gebaut und verändert">
+      <div class="title">
+        <p>Strategie, Transformation &amp; Veränderung</p>
+        <h1>BHT 2033</h1>
       </div>
-    </div>
 
-    <div class="accordion-item">
-      <button class="accordion-trigger">
-        <span>03 / Wir haben beobachtet</span>
-        <span class="accordion-icon">▼</span>
-      </button>
-      <div class="accordion-panel">
-        <p>Am ersten Tag des Projekts konntet ihr eine Bushaltestelle der Zukunft erleben. Eure Reaktionen waren sehr positiv. Ihr wart offen für das neue Aussehen und die verschiedenen Bereiche der Bushaltestelle. Viele von euch haben die Angebote genutzt und ausprobiert. Dadurch konnten wir gut verstehen, wie ihr über die Zukunft denkt und welche Wünsche und Ideen ihr habt. Zwei Tage später war die Bushaltestelle abgesperrt und nicht mehr zugänglich. Darauf habt ihr deutlich weniger positiv reagiert. Man hat gemerkt, dass euch dieser Ort wichtig geworden war. Viele von euch wollten nicht darauf verzichten und haben das auch gezeigt.</p>
-        <img class="panel-img" src="images/beobachtet_01.jpg" alt="Unsere Beobachtungen">
+      <div class="chapters-grid">
+
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Ausgangspunkt</h2>
+              <span class="chapter-num">Kapitel 1</span>
+            </div>
+          </button>
+          
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              <strong>Konzeptionelle Ableitung:</strong> Die Synthese aus Makro-Trends und internen Barrieren (geringe Sichtbarkeit, hohe Abbrecherrisiken) begründet das fundamentale Positionierungs-Paradoxon der BHT. Das gestalterische Konzept bricht mit der ungesteuerten MINT-Breite und übersetzt die stark heterogene Struktur der Erstsemester in ein exklusives Profilmerkmal: Die BHT positioniert sich kommunikativ nicht als rein selektierende Institution, sondern als verlässlicher, systemisch strukturierter Partner für ungerade, lebensnahe Bildungsbiografien.
+            </div>
+          </div>
+
+          <div class="sub-links-container">
+            <a href="PESTEL-Analyse_BHT.html" class="sub-card">
+              <div>
+                <h3>PESTEL-Analyse</h3>
+                <p>Makro-Umfeld des Berliner Bildungsmarktes</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+            <a href="stakeholder.html" class="sub-card">
+              <div>
+                <h3>Stakeholder-Analyse</h3>
+                <p>Macht-Interesse-Matrix der BHT-Akteure</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Identität</h2>
+              <span class="chapter-num">Kapitel 2</span>
+            </div>
+          </button>
+
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              <strong>Konzeptionelle Ableitung:</strong> Die Transformation des Business Model Canvas überführt den operativen Status Quo in eine scharf umrissene Identitäts-Architektur. Das zukünftige Wertversprechen (Value Proposition) verabschiedet sich konsequent von anonymer, globaler Skalierung. Identitätsstiftend wirkt die Fokussierung auf die Metropolregion Berlin-Brandenburg als exklusivem Wirkungsraum, in dem Technologie nahbar, anwendungsnah und im Schulterschluss mit KMU sowie der Landesverwaltung als regionaler Katalysator inszeniert wird.
+            </div>
+          </div>
+
+          <div class="sub-links-container">
+            <a href="Canvas.html" class="sub-card">
+              <div>
+                <h3>Business Model Canvas</h3>
+                <p>Geschäftsmodell und ökonomischer Status Quo</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Ambition</h2>
+              <span class="chapter-num">Kapitel 3</span>
+            </div>
+          </button>
+
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              <strong>Konzeptionelle Ableitung:</strong> Das normative Zielbild formuliert das radikale Leitmotiv „Technik für Menschen“. Die Ambition bricht mit austauschbaren Elite-Phrasen und etabliert ein verbindliches Versprechen von sozialer Mobilität bei gleichzeitiger Wahrung harter Qualitätsstandards. Im Kern des Identitätskonzepts steht das Bekenntnis, Diversität nicht nur administrativ zu verwalten, sondern Heterogenität als didaktische und visuelle Gestaltungsaufgabe zu begreifen, die Orientierung, Klarheit und Studienerfolg garantiert.
+            </div>
+          </div>
+
+          <div class="sub-links-container">
+            <a href="Vision.html" class="sub-card">
+              <div>
+                <h3>Vision</h3>
+                <p>Das langfristige normative Zukunftsbild</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+            <a href="mission.html" class="sub-card">
+              <div>
+                <h3>Mission</h3>
+                <p>Der gesellschaftliche Auftrag und Daseinszweck</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Strategie</h2>
+              <span class="chapter-num">Kapitel 4</span>
+            </div>
+          </button>
+
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              <strong>Konzeptionelle Ableitung:</strong> Die strategische Verortung im Berliner Hochschulsystem definiert die kommunikative Abgrenzung (USP) zu rein theoretischen Universitäten und agilen Online-Anbietern. Das strategische Profil basiert auf technologischer Fokussierung statt ungesteuerter Breite. Die TOWS-Matrix bildet das Fundament für die Storyline des „Campus als Reallabor“ – eine Positionierung, die physische Laborlandschaften als unkopierbare Transferräume mit regionaler Tiefenwirkung inszeniert.
+            </div>
+          </div>
+
+          <div class="sub-links-container">
+            <a href="strategische_marktanalyse.html" class="sub-card">
+              <div>
+                <h3>Strategische Marktanalyse</h3>
+                <p>Positionierung im Berliner Hochschulwettbewerb</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+            <a href="SWOT.html" class="sub-card">
+              <div>
+                <h3>SWOT &amp; TOWS</h3>
+                <p>Strategische Optionen und Verknüpfungen</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Transformation</h2>
+              <span class="chapter-num">Kapitel 5</span>
+            </div>
+          </button>
+
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              Die strategischen Ziele werden in ein lebendiges Orientierungssystem und operative Prozesse übersetzt. Hierzu gehört die Modernisierung der administrativen Abläufe ebenso wie die Befähigung agilerer Entscheidungsstrukturen. So wird sichergestellt, dass die Strategie nicht nur auf dem Papier existiert, sondern gelebt wird.
+            </div>
+          </div>
+
+          <div class="sub-links-container">
+            <a href="Leitbild.html" class="sub-card">
+              <div>
+                <h3>Leitbild</h3>
+                <p>Strategische Leitlinien und Orientierungssystem</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+            <a href="organisation.html" class="sub-card">
+              <div>
+                <h3>Aufbau- und Ablauforganisation</h3>
+                <p>Strukturelle und prozessuale Transformation</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Verantwortung</h2>
+              <span class="chapter-num">Kapitel 6</span>
+            </div>
+          </button>
+
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              Als urbane Bildungsinstitution verankert die BHT ökologische und gesellschaftliche Nachhaltigkeit im Kern ihrer Governance. Die Ausrichtung an harten Nachhaltigkeitszielen macht den gesellschaftlichen Beitrag messbar und transparent. Verantwortung ist damit das finale qualitative Kontrollorgan aller strategischen Maßnahmen.
+            </div>
+          </div>
+
+          <div class="sub-links-container">
+            <a href="nachhaltigkeit.html" class="sub-card">
+              <div>
+                <h3>Nachhaltige (Unternehmens-) Ziele</h3>
+                <p>Gesellschaftliche Verantwortung und Nachhaltigkeits-KPIs</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Handlungsempfehlungen</h2>
+              <span class="chapter-num">Kapitel 7</span>
+            </div>
+          </button>
+
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              Strategische Initiativen und operative Maßnahmenpakete zur erfolgreichen Positionierung der BHT bis zum Zielhorizont 2033.
+            </div>
+          </div>
+
+          <div class="sub-links-container">
+            <a href="handlungsempfehlungen.html" class="sub-card">
+              <div>
+                <h3>Roadmap &amp; Maßnahmen</h3>
+                <p>Operative Initiativen und Meilensteinplan</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="chapter-block">
+          <button class="chapter-toggle-btn" onclick="toggleSummary(this)">
+            <div class="chapter-header">
+              <h2 class="chapter-title">Quellenangaben</h2>
+              <span class="chapter-num">Kapitel 8</span>
+            </div>
+          </button>
+
+          <div class="chapter-summary-content">
+            <div class="summary-inner-text">
+              Systematische Dokumentation und Nachweise der verwendeten Primär- und Sekundärquellen der Ausarbeitung.
+            </div>
+          </div>
+
+          <div class="sub-links-container">
+            <a href="#quellen" class="sub-card">
+              <div>
+                <h3>Literaturverzeichnis</h3>
+                <p>Verzeichnis aller herangezogenen Daten und Klausurtagungen</p>
+              </div>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
       </div>
+
     </div>
+  </section>
 
-    <div class="accordion-item">
-      <button class="accordion-trigger">
-        <span>04 / Über uns</span>
-        <span class="accordion-icon">▼</span>
-      </button>
-      <div class="accordion-panel">
-        <p>Wir sind ein Team aus vier Studierenden der BHT Berlin. Zu Beginn unseres Masters <strong>“Transformation Design and Print”</strong> haben wir angefangen, uns mit dem CJD in der Sickinger Straße auszutauschen. Diese Zusammenarbeit läuft drei Semester lang (1,5 Jahre).</p>
-        <img class="panel-img" src="images/wir.jpg" alt="Wir">
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    <p>Danke fürs Mitmachen! Ihr habt Fragen? Ihr wollt uns etwas mitteilen? Meldet euch gerne unter <a href="mailto:raeumefuerjeden@gmail.com">raeumefuerjeden@gmail.com</a></p>
-  </footer>
-</div>
-
-<script>
-document.querySelectorAll('.accordion-trigger').forEach(trigger => {
-  trigger.addEventListener('click', () => {
-    const item = trigger.parentElement;
-    
-    document.querySelectorAll('.accordion-item').forEach(otherItem => {
-      if (otherItem !== item) {
-        otherItem.classList.remove('active');
-      }
-    });
-    
-    item.classList.toggle('active');
-  });
-});
-</script>
+  <script>
+    function toggleSummary(button) {
+      const block = button.closest('.chapter-block');
+      const content = block.querySelector('.chapter-summary-content');
+      content.classList.toggle('active');
+    }
+  </script>
 
 </body>
 </html>
