@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projektdokumentation – BHT 2033</title>
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --text-main: #1e293b;
+      --primary-color: #0f172a;
+      --secondary-color: #1e3a8a;
+      --accent-color: #3b82f6;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    .back-to-dashboard {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background-color: var(--card-bg);
+      color: var(--primary-color);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 1px solid var(--border-color);
+      transition: transform 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .back-to-dashboard:hover {
+      transform: translateY(-2px);
+    }
+
+    .header-banner {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .header-banner h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: var(--primary-color);
+      margin-top: 40px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+      font-size: 1.05rem;
+    }
+
+    /* --- INTERAKTIVES SYSTEM BOARD --- */
+    .feature-board {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 25px;
+      margin: 30px 0;
+    }
+
+    @media (max-width: 850px) {
+      .feature-board {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-btn {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 14px 18px;
+      border-radius: 10px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .feature-btn:hover {
+      border-color: var(--accent-color);
+    }
+
+    .feature-btn.active {
+      border-color: var(--secondary-color);
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    .feature-display {
+      background-color: var(--card-bg);
+      color: var(--text-main);
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      min-height: 280px;
+    }
+
+    .display-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    .display-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #334155;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 70px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="back-to-dashboard">← Dashboard</a>
+
+  <div class="header-banner">
+    <h1>Projektdokumentation</h1>
+  </div>
+
+  <main>
+    <h2>1. Konzept des interaktiven Web-Formats</h2>
+    <p>
+      Anstelle einer klassischen Präsentationsstruktur wurde diese strategische Analyse als vollständig funktionale, webbasierte Anwendung umgesetzt. Gehostet über GitHub, ist das Dashboard plattformunabhängig abrufbar. Dieser digitale Ansatz bildet die Kernphilosophie des Zukunftsbildes <strong>BHT 2033</strong> direkt in der Praxis ab: Technologische Orientierung und der Abbau von Informationsbarrieren werden hier als aktives Präsentationsmedium genutzt.
+    </p>
+
+    <h2>2. Funktionsweise und strategischer Mehrwert</h2>
+    <p>
+      Klicke auf die verschiedenen Funktionsbereiche, um zu sehen, wie die Struktur aufgebaut ist und warum dieses Format die strategische Analyse der BHT optimal unterstützt:
+    </p>
+
+    <div class="feature-board">
+      <div class="feature-nav">
+        <button class="feature-btn active" onclick="showFeature('nav', this)">Vernetzte Navigation</button>
+        <button class="feature-btn" onclick="showFeature('info', this)">Bedarfsgerechte Informationstiefe</button>
+        <button class="feature-btn" onclick="showFeature('responsive', this)">Optimiert für alle Endgeräte</button>
+        <button class="feature-btn" onclick="showFeature('code', this)">Eigene technische Umsetzung</button>
+        <button class="feature-btn" onclick="showFeature('bht', this)">Bezug zu BHT 2033</button>
+      </div>
+      
+      <div class="feature-display" id="featureDisplay">
+        <div class="display-title">Vernetzte Navigation</div>
+        <div class="display-text">
+          Das Dashboard verknüpft alle acht Kapitel logisch miteinander. Man muss sich nicht linear durch Folien klicken, sondern kann direkt zwischen der externen Analyse (PESTEL), der strategischen Verortung (SWOT/TOWS) und dem finalen Umsetzungsplan hin- und herwechseln. Das hält den roten Faden jederzeit nachvollziehbar.
+        </div>
+      </div>
+    </div>
+
+    <h2>3. Zuverlässigkeit der Anwendung</h2>
+    <p>
+      Durch die Bereitstellung als statisches Web-Format läuft die gesamte Anwendung stabil und performant. Da im Hintergrund keine komplexen Datenbankprozesse geladen werden müssen, sind schnelle Ladezeiten und eine fehlerfreie Darstellung bei der Überprüfung der Inhalte sichergestellt.
+    </p>
+
+    <p class="footer-note">
+      Projektdokumentation • Stand: Juni 2026
+    </p>
+  </main>
+
+  <script>
+    const features = {
+      nav: {
+        title: "Vernetzte Navigation",
+        text: "Das Dashboard verknüpft alle acht Kapitel logisch miteinander. Man muss sich nicht linear durch Folien klicken, sondern kann direkt zwischen der externen Analyse (PESTEL), der strategischen Verortung (SWOT/TOWS) und dem finalen Umsetzungsplan hin- und herwechseln. Das hält den roten Faden jederzeit nachvollziehbar."
+      },
+      info: {
+        title: "Bedarfsgerechte Informationstiefe",
+        text: "Durch interaktive Elemente (wie das Aufklappen von Kurzzusammenfassungen direkt auf der Startseite oder den Meilensteinplan der Roadmap) entscheidet der Leser selbst, wie tief er in ein Thema einsteigen möchte. Wichtige Kernpunkte sind sofort sichtbar, detaillierte Hintergründe sind nur einen Klick entfernt."
+      },
+      responsive: {
+        title: "Optimiert für alle Endgeräte",
+        text: "Die Benutzeroberfläche wurde flexibel gestaltet, sodass sie auf Desktop-Monitoren, Tablets und Smartphones gleichermaßen fehlerfrei funktioniert. Die Struktur passt sich automatisch der Bildschirmgröße an und bleibt auf jedem Endgerät optimal lesbar und bedienbar."
+      },
+      code: {
+        title: "Eigene technische Umsetzung",
+        text: "Der gesamte Programmcode basiert ausschließlich auf den nativen Kerntechnologien HTML, CSS und JavaScript. Es wurden bewusst keine externen Plug-ins, Bibliotheken oder Drittanbieter-Dienste eingebunden. Damit demonstriert das Projekt die im Studium an der BHT erlernten Programmier- und Entwicklungskompetenzen in einer eigenständigen Anwendung."
+      },
+      bht: {
+        title: "Bezug zu BHT 2033",
+        text: "Das Leitbild der Berliner Hochschule für Technik fordert Innovation, Modernität und digitale Transformation. Eine interaktive Webanwendung anstelle statischer Folien zeigt genau diesen Ansatz: Sie nutzt moderne Benutzeroberflächen, um komplexe strategische Zusammenhänge übersichtlich und zeitgemäß darzustellen."
+      }
+    };
+
+    function showFeature(key, btn) {
+      document.querySelectorAll('.feature-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const display = document.getElementById('featureDisplay');
+      display.innerHTML = `
+        <div class="display-title">${features[key].title}</div>
+        <div class="display-text">${features[key].text}</div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
